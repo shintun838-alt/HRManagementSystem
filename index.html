@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CoCo HR Software</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         LOGIN PAGE
+    ========================== -->
+
+    <section id="loginPage" class="page login-page">
+
+        <div class="login-card">
+
+            <div class="logo">
+                <span>CO</span>
+            </div>
+
+            <h1>CoCo</h1>
+
+            <h2>HR Software</h2>
+
+            <p class="welcome">
+                Welcome to CoCo HR Software
+            </p>
+
+            <form id="loginForm">
+
+                <div class="input-group">
+                    <label>Name</label>
+                    <input
+                        type="text"
+                        id="loginName"
+                        placeholder="Enter your name"
+                        required
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label>Position</label>
+
+                    <select id="loginPosition" required>
+                        <option value="">Select Position</option>
+                        <option value="HR Manager">HR Manager</option>
+                        <option value="HR Officer">HR Officer</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Manager">Manager</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        placeholder="Enter password"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="gold-button">
+                    Login
+                </button>
+
+                <p id="loginError" class="error-message"></p>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         DASHBOARD
+    ========================== -->
+
+    <section id="dashboardPage" class="page hidden">
+
+        <header class="top-header">
+
+            <div class="brand">
+                <div class="small-logo">CO</div>
+                <div>
+                    <strong>CoCo HR</strong>
+                    <small>Management System</small>
+                </div>
+            </div>
+
+            <div class="user-area">
+                <span id="currentUser"></span>
+
+                <button
+                    type="button"
+                    onclick="logout()"
+                    class="logout-button"
+                >
+                    Logout
+                </button>
+            </div>
+
+        </header>
+
+
+        <main class="dashboard-container">
+
+            <div class="dashboard-title">
+                <h1>Dashboard</h1>
+                <p>Human Resource Management System</p>
+            </div>
+
+
+            <!-- Dashboard Cards -->
+
+            <div class="dashboard-grid">
+
+                <div
+                    class="dashboard-card employee-card"
+                    onclick="openEmployees()"
+                >
+
+                    <div class="card-icon">
+                        👥
+                    </div>
+
+                    <div>
+                        <h3>Total Employees</h3>
+                        <strong id="totalEmployees">0</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="dashboard-card">
+
+                    <div class="card-icon">
+                        🏢
+                    </div>
+
+                    <div>
+                        <h3>Departments</h3>
+                        <strong>6</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="dashboard-card">
+
+                    <div class="card-icon">
+                        ⏰
+                    </div>
+
+                    <div>
+                        <h3>Attendance</h3>
+                        <strong>Today</strong>
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="dashboard-card payroll-dashboard-card"
+                    onclick="openPayroll()"
+                >
+
+                    <div class="card-icon">
+                        💰
+                    </div>
+
+                    <div>
+                        <h3>Salary Payroll</h3>
+                        <strong>Open</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </section>
+
+
+    <!-- =========================
+         EMPLOYEE PAGE
+    ========================== -->
+
+    <section id="employeePage" class="page hidden">
+
+        <header class="top-header">
+
+            <div class="brand">
+                <div class="small-logo">CO</div>
+
+                <div>
+                    <strong>CoCo HR</strong>
+                    <small>Employee Management</small>
+                </div>
+            </div>
+
+            <button
+                type="button"
+                onclick="showPage('dashboardPage')"
+                class="back-button"
+            >
+                ← Dashboard
+            </button>
+
+        </header>
+
+
+        <main class="content-container">
+
+            <div class="page-heading">
+
+                <div>
+                    <h1>Employee Information</h1>
+                    <p>Manage employee records</p>
+                </div>
+
+                <button
+                    type="button"
+                    onclick="openNewEmployee()"
+                    class="gold-button"
+                >
+                    + New Employee
+                </button>
+
+            </div>
+
+
+            <div class="table-card">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Employee ID</th>
+                            <th>Name</th>
+                            <th>Gender</th>
+                            <th>Date of Birth</th>
+                            <th>Phone</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="employeeTableBody">
+
+                    </tbody>
+
+                </table>
+
+                <div
+                    id="emptyEmployees"
+                    class="empty-message"
+                >
+                    No employee records yet.
+                </div>
+
+            </div>
+
+
+            <button
+                type="button"
+                onclick="openPayroll()"
+                class="payroll-button"
+            >
+                💰 Salary Payroll
+            </button>
+
+        </main>
+
+    </section>
+
+
+    <!-- =========================
+         NEW EMPLOYEE PAGE
+    ========================== -->
+
+    <section id="newEmployeePage" class="page hidden">
+
+        <header class="top-header">
+
+            <div class="brand">
+                <div class="small-logo">CO</div>
+
+                <div>
+                    <strong>CoCo HR</strong>
+                    <small>New Employee</small>
+                </div>
+            </div>
+
+            <button
+                type="button"
+                onclick="openEmployees()"
+                class="back-button"
+            >
+                ← Employees
+            </button>
+
+        </header>
+
+
+        <main class="form-container">
+
+            <div class="form-card">
+
+                <h1>New Employee</h1>
+
+                <p>Add a new employee to the HR system.</p>
+
+
+                <form id="employeeForm">
+
+                    <div class="form-grid">
+
+                        <div class="input-group">
+                            <label>Employee ID</label>
+
+                            <input
+                                type="text"
+                                id="employeeId"
+                                placeholder="EMP001"
+                                required
+                            >
+                        </div>
+
+
+                        <div class="input-group">
+                            <label>Employee Name</label>
+
+                            <input
+                                type="text"
+                                id="employeeName"
+                                placeholder="Employee Name"
+                                required
+                            >
+                        </div>
+
+
+                        <div class="input-group">
+                            <label>Gender</label>
+
+                            <select id="employeeGender" required>
+
+                                <option value="">
+                                    Select Gender
+                                </option>
+
+                                <option value="Male">
+                                    Male
+                                </option>
+
+                                <option value="Female">
+                                    Female
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="input-group">
+                            <label>Date of Birth</label>
+
+                            <input
+                                type="date"
+                                id="employeeDob"
+                                required
+                            >
+                        </div>
+
+
+                        <div class="input-group">
+                            <label>Phone</label>
+
+                            <input
+                                type="tel"
+                                id="employeePhone"
+                                placeholder="09xxxxxxxxx"
+                                required
+                            >
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-actions">
+
+                        <button
+                            type="button"
+                            onclick="openEmployees()"
+                            class="cancel-button"
+                        >
+                            Cancel
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="gold-button"
+                        >
+                            Save Employee
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </main>
+
+    </section>
+
+
+    <!-- =========================
+         PAYROLL PAGE
+    ========================== -->
+
+    <section id="payrollPage" class="page hidden">
+
+        <header class="top-header">
+
+            <div class="brand">
+
+                <div class="small-logo">CO</div>
+
+                <div>
+                    <strong>CoCo HR</strong>
+                    <small>Salary Payroll</small>
+                </div>
+
+            </div>
+
+            <button
+                type="button"
+                onclick="openEmployees()"
+                class="back-button"
+            >
+                ← Employees
+            </button>
+
+        </header>
+
+
+        <main class="content-container">
+
+            <div class="page-heading">
+
+                <div>
+                    <h1>Salary Payroll</h1>
+                    <p>Employee payroll information</p>
+                </div>
+
+                <button
+                    type="button"
+                    onclick="openPayrollCalculation()"
+                    class="gold-button"
+                >
+                    🧮 Payroll Calculation
+                </button>
+
+            </div>
+
+
+            <div class="table-card">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Employee ID</th>
+                            <th>Employee Name</th>
+                            <th>Gender</th>
+                            <th>Date of Birth</th>
+                            <th>Phone</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="payrollEmployeeTable">
+
+                    </tbody>
+
+                </table>
+
+                <div
+                    id="emptyPayrollEmployees"
+                    class="empty-message"
+                >
+                    No employees available.
+                </div>
+
+            </div>
+
+        </main>
+
+    </section>
+
+
+    <!-- =========================
+         PAYROLL CALCULATION PAGE
+    ========================== -->
+
+    <section id="payrollCalculationPage" class="page hidden">
+
+        <header class="top-header">
+
+            <div class="brand">
+
+                <div class="small-logo">CO</div>
+
+                <div>
+                    <strong>CoCo HR</strong>
+                    <small>Payroll Calculation</small>
+                </div>
+
+            </div>
+
+            <button
+                type="button"
+                onclick="openPayroll()"
+                class="back-button"
+            >
+                ← Payroll
+            </button>
+
+        </header>
+
+
+        <main class="form-container">
+
+            <div class="form-card">
+
+                <h1>Payroll Calculation</h1>
+
+                <p>
+                    Calculate employee net salary.
+                </p>
+
+
+                <form id="payrollForm">
+
+                    <div class="form-grid">
+
+
+                        <div class="input-group">
+
+                            <label>Employee ID</label>
+
+                            <select
+                                id="payrollEmployeeId"
+                                required
+                            >
+
+                                <option value="">
+                                    Select Employee
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="input-group">
+
+                            <label>Employee Name</label>
+
+                            <input
+                                type="text"
+                                id="payrollEmployeeName"
+                                readonly
+                            >
+
+                        </div>
+
+
+                        <div class="input-group">
+
+                            <label>Basic Salary</label>
+
+                            <input
+                                type="number"
+                                id="basicSalary"
+                                min="0"
+                                placeholder="0"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="input-group">
+
+                            <label>Allowance</label>
+
+                            <input
+                                type="number"
+                                id="allowance"
+                                min="0"
+                                value="0"
+                            >
+
+                        </div>
+
+
+                        <div class="input-group">
+
+                            <label>Overtime</label>
+
+                            <input
+                                type="number"
+                                id="overtime"
+                                min="0"
+                                value="0"
+                            >
+
+                        </div>
+
+
+                        <div class="input-group">
+
+                            <label>Deduction</label>
+
+                            <input
+                                type="number"
+                                id="deduction"
+                                min="0"
+                                value="0"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-actions">
+
+                        <button
+                            type="button"
+                            onclick="openPayroll()"
+                            class="cancel-button"
+                        >
+                            Cancel
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="gold-button"
+                        >
+                            Calculate
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </main>
+
+    </section>
+
+
+    <!-- =========================
+         PAYSLIP / VOUCHER
+    ========================== -->
+
+    <section id="voucherPage" class="page hidden">
+
+        <main class="voucher-container">
+
+            <div id="voucher" class="voucher">
+
+                <div class="voucher-header">
+
+                    <div class="voucher-logo">
+                        CO
+                    </div>
+
+                    <div>
+                        <h1>CoCo HR Software</h1>
+                        <p>Salary Payment Voucher</p>
+                    </div>
+
+                </div>
+
+
+                <div class="voucher-date">
+
+                    <div>
+                        <strong>Date:</strong>
+                        <span id="voucherDate"></span>
+                    </div>
+
+                    <div>
+                        <strong>Time:</strong>
+                        <span id="voucherTime"></span>
+                    </div>
+
+                </div>
+
+
+                <hr>
+
+
+                <h3>Employee Information</h3>
+
+
+                <div class="voucher-grid">
+
+                    <div>
+                        <strong>Employee ID</strong>
+                        <span id="voucherEmployeeId"></span>
+                    </div>
+
+                    <div>
+                        <strong>Employee Name</strong>
+                        <span id="voucherEmployeeName"></span>
+                    </div>
+
+                    <div>
+                        <strong>Gender</strong>
+                        <span id="voucherGender"></span>
+                    </div>
+
+                    <div>
+                        <strong>Date of Birth</strong>
+                        <span id="voucherDob"></span>
+                    </div>
+
+                    <div>
+                        <strong>Phone</strong>
+                        <span id="voucherPhone"></span>
+                    </div>
+
+                </div>
+
+
+                <h3>Salary Details</h3>
+
+
+                <table class="salary-table">
+
+                    <tr>
+                        <td>Basic Salary</td>
+                        <td id="voucherBasic"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Allowance</td>
+                        <td id="voucherAllowance"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Overtime</td>
+                        <td id="voucherOvertime"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Deduction</td>
+                        <td id="voucherDeduction"></td>
+                    </tr>
+
+                    <tr class="net-row">
+                        <td>NET SALARY</td>
+                        <td id="voucherNet"></td>
+                    </tr>
+
+                </table>
+
+
+                <div class="voucher-footer">
+
+                    <p>
+                        This is a computer-generated salary voucher.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="voucher-actions">
+
+                <button
+                    type="button"
+                    onclick="savePayroll()"
+                    class="gold-button"
+                >
+                    💾 Save
+                </button>
+
+                <button
+                    type="button"
+                    onclick="printVoucher()"
+                    class="print-button"
+                >
+                    🖨 Print / PDF
+                </button>
+
+                <button
+                    type="button"
+                    onclick="openPayroll()"
+                    class="cancel-button"
+                >
+                    ← Back
+                </button>
+
+            </div>
+
+        </main>
+
+    </section>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,812 @@
+/* =========================
+   GLOBAL
+========================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --dark: #0b1020;
+    --dark2: #151c30;
+    --gold: #d4af37;
+    --gold-light: #f3d77a;
+    --white: #ffffff;
+    --gray: #8f98aa;
+    --light: #f5f6fa;
+    --border: #e5e7eb;
+    --danger: #dc3545;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--light);
+    color: #1d2433;
+}
+
+button,
+input,
+select {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background:
+        radial-gradient(
+            circle at top left,
+            #2d3552,
+            transparent 40%
+        ),
+        linear-gradient(
+            135deg,
+            #070b15,
+            #151c30
+        );
+
+    padding: 20px;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 460px;
+
+    padding: 45px;
+
+    background: rgba(255,255,255,0.97);
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,0.35);
+
+    text-align: center;
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+
+    margin: 0 auto 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--gold-light),
+            var(--gold)
+        );
+
+    color: var(--dark);
+
+    font-size: 25px;
+    font-weight: bold;
+
+    border: 5px solid #f8e8a9;
+}
+
+.login-card h1 {
+    color: var(--dark);
+    font-size: 34px;
+}
+
+.login-card h2 {
+    color: var(--gold);
+    margin-top: 5px;
+}
+
+.welcome {
+    margin: 18px 0 30px;
+    color: var(--gray);
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 18px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 7px;
+
+    font-weight: 600;
+    color: #30384a;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    background: white;
+    outline: none;
+
+    font-size: 15px;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: var(--gold);
+
+    box-shadow:
+        0 0 0 3px rgba(212,175,55,0.12);
+}
+
+.gold-button {
+    border: none;
+
+    padding: 13px 22px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--gold-light),
+            var(--gold)
+        );
+
+    color: var(--dark);
+
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+
+.gold-button:hover {
+    transform: translateY(-2px);
+}
+
+.login-card .gold-button {
+    width: 100%;
+    margin-top: 8px;
+}
+
+.error-message {
+    color: var(--danger);
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.top-header {
+    min-height: 75px;
+
+    padding: 14px 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: var(--dark);
+
+    color: white;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.15);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.small-logo {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--gold-light),
+            var(--gold)
+        );
+
+    color: var(--dark);
+
+    font-weight: bold;
+}
+
+.brand strong {
+    display: block;
+    font-size: 18px;
+}
+
+.brand small {
+    display: block;
+    color: var(--gray);
+    margin-top: 2px;
+}
+
+.user-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logout-button,
+.back-button {
+    border: 1px solid rgba(255,255,255,0.25);
+
+    background: transparent;
+
+    color: white;
+
+    padding: 9px 15px;
+
+    border-radius: 8px;
+}
+
+.logout-button:hover,
+.back-button:hover {
+    background: rgba(255,255,255,0.08);
+}
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+.dashboard-container {
+    padding: 40px;
+    max-width: 1250px;
+    margin: auto;
+}
+
+.dashboard-title {
+    margin-bottom: 30px;
+}
+
+.dashboard-title h1 {
+    font-size: 34px;
+    color: var(--dark);
+}
+
+.dashboard-title p {
+    color: var(--gray);
+    margin-top: 6px;
+}
+
+.dashboard-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 20px;
+}
+
+.dashboard-card {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 18px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+
+    border: 1px solid var(--border);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.05);
+
+    transition: 0.2s;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,0.1);
+}
+
+.employee-card,
+.payroll-dashboard-card {
+    cursor: pointer;
+}
+
+.card-icon {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: #fff7d8;
+
+    font-size: 28px;
+}
+
+.dashboard-card h3 {
+    font-size: 14px;
+    color: var(--gray);
+
+    margin-bottom: 6px;
+}
+
+.dashboard-card strong {
+    font-size: 24px;
+    color: var(--dark);
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+.content-container,
+.form-container {
+    max-width: 1200px;
+
+    margin: auto;
+
+    padding: 40px;
+}
+
+.page-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 25px;
+}
+
+.page-heading h1 {
+    font-size: 30px;
+}
+
+.page-heading p {
+    color: var(--gray);
+    margin-top: 5px;
+}
+
+.table-card {
+    background: white;
+
+    border-radius: 16px;
+
+    overflow-x: auto;
+
+    border: 1px solid var(--border);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.05);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: var(--dark);
+
+    color: white;
+
+    padding: 15px;
+
+    text-align: left;
+
+    white-space: nowrap;
+}
+
+td {
+    padding: 14px 15px;
+
+    border-bottom:
+        1px solid var(--border);
+
+    white-space: nowrap;
+}
+
+tr:hover td {
+    background: #fafafa;
+}
+
+.empty-message {
+    text-align: center;
+    padding: 35px;
+
+    color: var(--gray);
+}
+
+.delete-button {
+    border: none;
+
+    background: #ffe8eb;
+
+    color: var(--danger);
+
+    padding: 7px 12px;
+
+    border-radius: 7px;
+}
+
+.payroll-button {
+    margin-top: 25px;
+
+    border: none;
+
+    background: var(--dark);
+
+    color: white;
+
+    padding: 13px 20px;
+
+    border-radius: 10px;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   FORMS
+========================= */
+
+.form-card {
+    max-width: 850px;
+
+    margin: auto;
+
+    background: white;
+
+    padding: 35px;
+
+    border-radius: 18px;
+
+    border: 1px solid var(--border);
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,0.06);
+}
+
+.form-card h1 {
+    color: var(--dark);
+    margin-bottom: 7px;
+}
+
+.form-card > p {
+    color: var(--gray);
+    margin-bottom: 30px;
+}
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 5px 20px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    margin-top: 25px;
+}
+
+.cancel-button {
+    padding: 12px 20px;
+
+    border: 1px solid var(--border);
+
+    background: white;
+
+    border-radius: 10px;
+}
+
+.print-button {
+    padding: 12px 20px;
+
+    border: none;
+
+    background: var(--dark);
+
+    color: white;
+
+    border-radius: 10px;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   VOUCHER
+========================= */
+
+.voucher-container {
+    min-height: 100vh;
+
+    padding: 40px;
+
+    background: #eef0f5;
+}
+
+.voucher {
+    max-width: 800px;
+
+    margin: auto;
+
+    padding: 45px;
+
+    background: white;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 15px 50px rgba(0,0,0,0.12);
+}
+
+.voucher-header {
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+
+    margin-bottom: 25px;
+}
+
+.voucher-logo {
+    width: 65px;
+    height: 65px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--gold-light),
+            var(--gold)
+        );
+
+    color: var(--dark);
+
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.voucher-header h1 {
+    color: var(--dark);
+}
+
+.voucher-header p {
+    color: var(--gray);
+    margin-top: 5px;
+}
+
+.voucher-date {
+    display: flex;
+    justify-content: space-between;
+
+    color: #555;
+
+    margin: 15px 0;
+}
+
+.voucher h3 {
+    color: var(--dark);
+
+    margin: 25px 0 15px;
+}
+
+.voucher-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+}
+
+.voucher-grid div {
+    padding: 12px;
+
+    background: #f7f8fa;
+
+    border-radius: 8px;
+}
+
+.voucher-grid strong {
+    display: block;
+
+    font-size: 12px;
+
+    color: var(--gray);
+
+    margin-bottom: 5px;
+}
+
+.salary-table td {
+    padding: 15px;
+}
+
+.salary-table td:last-child {
+    text-align: right;
+
+    font-weight: bold;
+}
+
+.salary-table .net-row td {
+    background: #fff7d8;
+
+    color: var(--dark);
+
+    font-size: 18px;
+
+    border-top: 2px solid var(--gold);
+}
+
+.voucher-footer {
+    text-align: center;
+
+    margin-top: 30px;
+
+    color: var(--gray);
+
+    font-size: 12px;
+}
+
+.voucher-actions {
+    max-width: 800px;
+
+    margin: 20px auto 0;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+    .dashboard-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 650px) {
+
+    .top-header {
+        padding: 12px 18px;
+
+        flex-wrap: wrap;
+
+        gap: 10px;
+    }
+
+    .dashboard-container,
+    .content-container,
+    .form-container {
+        padding: 22px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .page-heading {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+    .voucher {
+        padding: 25px;
+    }
+
+    .voucher-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .voucher-date {
+        flex-direction: column;
+
+        gap: 8px;
+    }
+
+    .login-card {
+        padding: 30px 22px;
+    }
+}
+
+
+/* =========================
+   PRINT
+========================= */
+
+@media print {
+
+    body {
+        background: white;
+    }
+
+    .voucher-container {
+        padding: 0;
+
+        background: white;
+    }
+
+    .voucher {
+        box-shadow: none;
+
+        max-width: 100%;
+
+        border-radius: 0;
+    }
+
+    .voucher-actions {
+        display: none;
+    }
+
+}
+
